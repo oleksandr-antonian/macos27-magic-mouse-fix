@@ -73,8 +73,8 @@ reading your input, no kernel extension, no touching the system volume. Read it 
 that's why it ships as source and not a binary.
 
 Running as root avoids needing Input Monitoring permission. Without `sudo`, grant Terminal
-that permission instead; one of the mouse's four HID interfaces will still refuse, but the
-other three are usually enough.
+that permission instead. The mouse exposes four HID interfaces and one of them often refuses
+the report no matter who is asking — three getting through is enough.
 
 ## Please tell Apple too
 
