@@ -35,9 +35,22 @@ The agent re-sends the message whenever the mouse reconnects:
 ```sh
 sudo mkdir -p /usr/local/bin
 sudo cp magicmousefix /usr/local/bin/
+sudo chmod 755 /usr/local/bin/magicmousefix
 sudo cp com.local.magicmousefix.plist /Library/LaunchDaemons/
 sudo chown root:wheel /Library/LaunchDaemons/com.local.magicmousefix.plist
+sudo chmod 644 /Library/LaunchDaemons/com.local.magicmousefix.plist
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.local.magicmousefix.plist
+```
+
+Build the binary first — the repository ships source only, so `magicmousefix` has to exist in
+the folder you copy from.
+
+`Bootstrap failed: 5: Input/output error` almost always means the daemon is already loaded.
+Check with `sudo launchctl print system/com.local.magicmousefix` — if it says `state = running`,
+you are done. If you are reinstalling, `bootout` first:
+
+```sh
+sudo launchctl bootout system/com.local.magicmousefix
 ```
 
 Log lives in `/var/log/magicmousefix.log`. Toggle the mouse off and on — you should see a
